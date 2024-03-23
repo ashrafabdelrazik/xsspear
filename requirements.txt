@@ -1,0 +1,6 @@
+requests
+argparse
+aiohttp
+asyncio
+tqdm
+uro
