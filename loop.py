@@ -14,34 +14,30 @@ def loop(parameters, headers, url):
   q = "=xsspear<>&"
   out = open('xsspear.out', 'a+')
 
-  print("\n\033[96m[!] Requests: \033[33m%s" % math.trunc(len(p)/15))
-  print("\033[96m[!] Scanning: \033[33m%s" % url)
+  print("\n\033[96m[!] Parameters: \033[33m%s" % math.trunc(len(p)))
+  #print("\033[96m[!] Scanning: \033[33m%s" % url)
 
-  with tqdm(total=math.trunc(len(p)/15), desc="\033[96m[!] RXSS Scan", bar_format="\033[33m{l_bar}{bar}") as pbar:
-    o = set()
+  o = set()
 
-    async def main(p):
+  async def main(p):
+    async def get(c_url, session):
+      print("\033[96m[!] Scanning: \033[33m%s" % c_url)
+      try:
+        async with session.get(c_url, headers=headers,timeout=60) as response:
+          html = await response.text()
+          if "xsspear<>" in html or re.search(r" \w+=xsspear", html) or re.search(r" \w+='xsspear", html) or re.search(r" \w+=\"xsspear", html) or re.search(r"var \w+ = 'xsspear", html):
+            o.add(c_url)
+            out.write("%s\n" % c_url)
+      except:
+        print("[-] Connection Failed!")
 
-      async def get(c_url, session):
-        try:
-          async with session.get(c_url, headers=headers,
-                                 timeout=60) as response:
-            html = await response.text()
-            if "xsspear<>" in html or re.search(r" \w+=xsspear", html) or re.search(r" \w+='xsspear", html) or re.search(r" \w+=\"xsspear", html) or re.search(r"var \w+ = 'xsspear", html):
-              o.add(c_url)
-              out.write("%s\n" % c_url)
-            pbar.update(1)
-        except:
-          pbar.update(1)
+    async with aiohttp.ClientSession() as session:
+      ret = await asyncio.gather(*[get(url + "?&" + p1 + q + p2 + q + p3 + q + p4 + q + p5 + q + p6 + q + p7 + q + p8 + q + p9 + q + p10 + q + p11 + q + p12 + q + p13 + q + p14 + q + p15 + q, session) for p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15 in zip(parameters,parameters,parameters,parameters,parameters,parameters,parameters,parameters,parameters,parameters,parameters,parameters,parameters,parameters,parameters)])
 
-      async with aiohttp.ClientSession() as session:
-        ret = await asyncio.gather(
-            *[get(url + "?&" + p1 + q + p2 + q + p3 + q + p4 + q + p5 + q + p6 + q + p7 + q + p8 + q + p9 + q + p10 + q + p11 + q + p12 + q + p13 + q + p14 + q + p15 + q, session) for p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15 in zip(parameters,parameters,parameters,parameters,parameters,parameters,parameters,parameters,parameters,parameters,parameters,parameters,parameters,parameters,parameters)])
-
-    loop = asyncio.get_event_loop()
-    start = time.time()
-    loop.run_until_complete(main(parameters))
-    end = time.time()
+  loop = asyncio.get_event_loop()
+  start = time.time()
+  loop.run_until_complete(main(parameters))
+  end = time.time()
 
   out.close()
 
