@@ -1,4 +1,4 @@
-# XSSpear v3
+# XSSpear (Cross Site Scripting Scanner)
 
 ### Install Dependencies:
 `pip3 install -r requirements.txt`
