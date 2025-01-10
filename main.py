@@ -17,7 +17,7 @@ def main(mode, url, sub, headers, c):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("-m", "--mode", required=True, help="The tools have 2 scan modes, url and sub. url for single target url and sub for subdomain")
+    ap.add_argument("-m", "--mode", required=True, help="modes: url, sub")
     ap.add_argument("-u", "--url", required=False, help="mode")
     ap.add_argument("-s", "--sub", required=False, help="mode")
     ap.add_argument("-a", "--useragent", required=False, help="User Agent", nargs='?', const=1, default="Mozilla/5.0 (Windows NT 6.1; WOW64; rv:33.0) Gecko/20120101 Firefox/33.0")
