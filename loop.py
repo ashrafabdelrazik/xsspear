@@ -54,12 +54,12 @@ def loop(parameters, headers, url):
 #        subtype='html')
 
 #    message['Subject'] = '[XSSpear] Possible rXSS on ' + url
-#    message['From'] = 'ashrafabdelrazikato@hotmail.com'
+#    message['From'] = 'example@hotmail.com'
 #    message['To'] = 'ashrafabdelrazik1996@gmail.com'
 #    try:
 #      server = smtplib.SMTP('smtp.office365.com', 587)
 #      server.starttls()
-#      server.login('ashrafabdelrazikato@hotmail.com', 'Aliaa2309!x')
+#      server.login('example@hotmail.com', 'Password123!')
 #      server.send_message(message)
 #      server.quit()
 #    except Exception as e:
